@@ -1,0 +1,299 @@
+{% extends "layout.html" %}
+{% block content %}
+
+
+<!-- Start of Main -->
+<div class="main">
+    <div class="container">
+        <div class="intro-wrapper mb-4">
+            <div class="swiper-container swiper-theme nav-inner swiper-nav-ld animation-slider" data-swiper-options="{
+                        'autoplay': {
+                            'delay': 8000,
+                            'disableOnInteraction': false
+                        }
+                    }">
+                <div class="swiper-wrapper row cols-1 gutter-no">
+                    <div class="swiper-slide banner banner-fixed intro-slide intro-slide1 br-sm"
+                         style="background-image: url({{ url_for('static', filename='images/prilbanner.jpg')}});
+                            background-color: #262729;">
+
+                    </div>
+                    <!-- End Of Intro Slide 1 -->
+                    <div class="swiper-slide banner banner-fixed intro-slide intro-slide2  br-sm"
+                         style="background-image: url({{ url_for('static', filename='images/tazh.jpg') }});
+                                background-color: #DCE0DF;">
+                    </div>
+                    <!-- End of Intro Slide 3 -->
+                    <div class="swiper-slide banner banner-fixed intro-slide intro-slide3 br-sm"
+                         style="background-image: url({{ url_for('static', filename='images/persil.jpg') }});
+                                background-color: #696A6E;">
+                    </div>
+
+                </div>
+                <button class="swiper-button-next"></button>
+                <button class="swiper-button-prev"></button>
+            </div>
+            <!-- End of Intro Wrapper -->
+            <div class="swiper-container swiper-theme intro-banner appear-animate" data-swiper-options="{
+                    'spaceBetween': 20,
+                    'slidesPerView': 1,
+                    'breakpoints': {
+                        '576': {
+                            'slidesPerView': 2,
+                            'spaceBetween': 15
+                        },
+                        '992': {
+                            'slidesPerView': 3
+                        }
+                    }
+                }" style="width: 2000px; ;">
+
+                <div class="swiper-pagination"></div>
+            </div>
+
+
+            <h2 class="title text-left pt-1 mb-5 mt-5 appear-animate">برند ها</h2>
+            <div class="swiper">
+                <div class="swiper-container category-wrapper swiper-theme appear-animate" data-swiper-options="{
+                        'spaceBetween': 20,
+                        'slidesPerView': 2,
+                        'breakpoints': {
+                            '576': {
+                                'slidesPerView': 3
+                            },
+                            '768': {
+                                'slidesPerView': 4
+                            },
+                            '992': {
+                                'slidesPerView': 5
+                            },
+                            '1200': {
+                                'slidesPerView': 6
+                            }
+                        }
+                    }">
+                    <div class="swiper-wrapper row cols-xl-6 cols-lg-5 cols-md-4 cols-sm-3 cols-2">
+                       {% for brand in brands %}
+                        <div class="swiper-slide category category-ellipse">
+                            <figure class="category-media">
+                                <a href="shop-banner-sidebar.php?category_id=<?=$category->Category_ID?>">
+                                    <img src="{{ url_for('static', filename=brand.picture) }}" alt="Categroy" width="190"
+                                         height="190" style="background-color: #5C92C0;"/>
+                                </a>
+                            </figure>
+                            <div class="category-content">
+                                <h4 class="category-name">
+                                    <a href="shop-banner-sidebar.html">{{ brand.name }} </a>
+                                </h4>
+                            </div>
+                        </div>
+
+                        {% endfor %}
+                        <script>
+
+                        </script>
+                    </div>
+                    <div class="swiper-pagination"></div>
+                </div>
+            </div>
+
+
+        </div>
+        <!-- End of Container -->
+
+        <section class="grey-section">
+            <div class="container">
+                <div class="title-link-wrapper mb-2 appear-animate">
+                    <h2 class="title">آخرین اخبار </h2>
+                    <a href="blog-listing.html" class="font-weight-bold font-size-normal ls-25">نمایش همه بایگانی ها</a>
+                </div>
+                <div class="swiper-container swiper-theme post-wrapper mb-5 appear-animate" data-swiper-options="{
+                        'spaceBetween': 20,
+                        'slidesPerView': 1,
+                        'breakpoints': {
+                            '576': {
+                                'slidesPerView': 2
+                            },
+                            '768': {
+                                'slidesPerView': 3
+                            },
+                            '992': {
+                                'slidesPerView': 4
+                            }
+                        }
+                    }">
+                    <div class="swiper-wrapper row cols-lg-4 cols-md-3 cols-sm-2 cols-1">
+                        <div class="swiper-slide post text-center overlay-zoom">
+                            <figure class="post-media br-sm">
+                                <a href="post-single.html">
+                                    <img src="{{ url_for('static',filename='images/blog-4.jpg') }}" alt="Post"
+                                         width="590" height="380"
+                                         style="background-color: #C4C1BC;"/>
+                                </a>
+                            </figure>
+                            <div class="post-details">
+                                <div class="post-meta">
+                                    <!-- <a href="#" class="post-author"></a>
+                                    - <a href="#" class="post-date mr-0"></a> -->
+                                </div>
+                                <h4 class="post-title"><a href="post-single.html">نحوه ثبت و تأیید چک در سامانه صیاد</a>
+                                </h4>
+                                <a href="post-single.html"
+                                   class="btn btn-link btn-dark btn-underline font-weight-normal">ادامه مطلب <i
+                                        class="w-icon-long-arrow-left"></i></a>
+                            </div>
+                        </div>
+                        <div class="swiper-slide post text-center overlay-zoom">
+                            <figure class="post-media br-sm">
+                                <a href="post-single.html">
+                                    <img src="{{ url_for('static',filename='images/blog-1.jpg') }}" alt="Post"
+                                         width="590" height="380"
+                                         style="background-color: #F3D5BA;"/>
+                                </a>
+                            </figure>
+                            <div class="post-details">
+                                <div class="post-meta">
+                                    <!-- توسط <a href="#" class="post-author"></a>
+                                    - <a href="#" class="post-date mr-0"></a> -->
+                                </div>
+                                <h4 class="post-title"><a href="post-single.html">دعوت به همکاری</a></h4>
+                                <a href="post-single.html"
+                                   class="btn btn-link btn-dark btn-underline font-weight-normal">ادامه مطلب <i
+                                        class="w-icon-long-arrow-left"></i></a>
+                            </div>
+                        </div>
+                        <div class="swiper-slide post text-center overlay-zoom">
+                            <figure class="post-media br-sm">
+                                <a href="post-single.html">
+                                    <img src="{{ url_for('static', filename='/images/blog-2.jpg') }}" alt="Post"
+                                         width="590" height="380"
+                                         style="background-color: #999999;"/>
+                                </a>
+                            </figure>
+                            <div class="post-details">
+                                <div class="post-meta">
+                                    <!-- توسط <a href="#" class="post-author">جان دوو</a>
+                                    - <a href="#" class="post-date mr-0">1401.1.23</a> -->
+                                </div>
+                                <h4 class="post-title"><a href="post-single.html">موزع یا مامور پخش کیست؟</a></h4>
+                                <a href="post-single.html"
+                                   class="btn btn-link btn-dark btn-underline font-weight-normal">ادامه مطلب <i
+                                        class="w-icon-long-arrow-left"></i></a>
+                            </div>
+                        </div>
+                        <div class="swiper-slide post text-center overlay-zoom">
+                            <figure class="post-media br-sm">
+                                <a href="post-single.html">
+                                    <img src="{{ url_for('static', filename='images/blog-3.jpg') }}" alt="Post"
+                                         width="590" height="380"
+                                         style="background-color: #211715;"/>
+                                </a>
+                            </figure>
+                            <div class="post-details">
+                                <div class="post-meta">
+                                    <!-- توسط <a href="#" class="post-author">جان دوو</a>
+                                    - <a href="#" class="post-date mr-0">1401.1.23</a> -->
+                                </div>
+                                <h4 class="post-title"><a href="post-single.html">چند ایده برای افزایش فروش سوپرمارکت
+                                    ها</a></h4>
+                                <a href="post-single.html"
+                                   class="btn btn-link btn-dark btn-underline font-weight-normal">ادامه مطلب <i
+                                        class="w-icon-long-arrow-left"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-pagination"></div>
+                </div>
+                <!-- End of Swiper Container -->
+
+                <h2 class="title text-left mb-5 appear-animate">مشتریان ما </h2>
+                <div class="swiper-container swiper-theme brands-wrapper mb-10 bg-white appear-animate"
+                     data-swiper-options="{
+                        'slidesPerView': 1,
+                        'breakpoints': {
+                            '576': {
+                                'slidesPerView': 3
+                            },
+                            '768': {
+                                'slidesPerView': 4
+                            },
+                            '992': {
+                                'slidesPerView': 5
+                            }
+                        }
+                    }">
+                    <div class="swiper-wrapper row gutter-no cols-lg-5 cols-md-4 cols-sm-3 cols-2">
+                        <div class="swiper-slide brand-col">
+                            <figure class="brand-wrapper" style="padding: 20px;">
+                                <img src="assets/images/demos/demo3/brand/1.jpg" alt="Brand" width="247" height="94"/>
+                            </figure>
+                            <figure class="brand-wrapper" style="padding: 20px;">
+                                <img src="assets/images/demos/demo3/brand/2.jpg" alt="Brand" width="247" height="94"/>
+                            </figure>
+                        </div>
+                        <div class="swiper-slide brand-col">
+                            <figure class="brand-wrapper" style="padding: 20px;">
+                                <img src="assets/images/demos/demo3/brand/3.jpg" alt="Brand" width="247" height="94"/>
+                            </figure>
+                            <figure class="brand-wrapper" style="padding: 20px;">
+                                <img src="assets/images/demos/demo3/brand/4.jpg" alt="Brand" width="247" height="94"/>
+                            </figure>
+                        </div>
+                        <div class="swiper-slide brand-col">
+                            <figure class="brand-wrapper" style="padding: 20px;">
+                                <img src="assets/images/demos/demo3/brand/5.jpg" alt="Brand" width="247" height="94"/>
+                            </figure>
+                            <figure class="brand-wrapper" style="padding: 20px;">
+                                <img src="assets/images/demos/demo3/brand/6.jpg" alt="Brand" width="247" height="94"/>
+                            </figure>
+                        </div>
+                        <div class="swiper-slide brand-col">
+                            <figure class="brand-wrapper" style="padding: 20px;">
+                                <img src="assets/images/demos/demo3/brand/7.jpg" alt="Brand" width="247" height="94"/>
+                            </figure>
+                            <figure class="brand-wrapper" style="padding: 20px;">
+                                <img src="assets/images/demos/demo3/brand/8.jpg" alt="Brand" width="247" height="94"/>
+                            </figure>
+                        </div>
+                        <div class="swiper-slide brand-col">
+                            <figure class="brand-wrapper" style="padding: 20px;">
+                                <img src="assets/images/demos/demo3/brand/9.jpg" alt="Brand" width="247" height="94"/>
+                            </figure>
+                            <figure class="brand-wrapper" style="padding: 20px;">
+                                <img src="assets/images/demos/demo3/brand/10.jpg" alt="Brand" width="247" height="94"/>
+                            </figure>
+                        </div>
+                    </div>
+                </div>
+                <!-- End of Brands Wrapper -->
+
+                <div class="cta-wrapper pt-2 pb-1 mb-10 appear-animate">
+                    <div class="banner banner-newsletter-bg br-sm"
+                         style="background-image: url(assets/images/demos/demo3/newsletter-bg.jpg); background-color: #636363;">
+                        <div class="content-left mb-4 mb-lg-0">
+                            <h4 class="banner-title text-white ls-25 font-weight-bold text-uppercase">مشترک شدن در
+                                خبرنامه ما</h4>
+                            <p class="text-white mb-0">تمام آخرین اطلاعات در مورد رویدادها، فروش ها و پیشنهادات را
+                                دریافت کنید.
+                            </p>
+                        </div>
+                        <div class="content-right">
+                            <form action="#" method="get"
+                                  class="input-wrapper input-wrapper-rounded ml-auto mr-auto mr-lg-0">
+                                <input type="email" class="form-control text-default" name="email" id="email"
+                                       placeholder="آدرس ایمیل ">
+                                <button class="btn btn-primary btn-rounded btn-icon-right" type="submit">اشتراک در <i
+                                        class="w-icon-long-arrow-left"></i></button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!--End of Cta Wrapper -->
+
+            </div>
+            <div class="swiper-pagination"></div>
+            <!-- End of Container -->
+        </section>
+    </div>
+    <!-- End of Main --></div>
+{% endblock %}
