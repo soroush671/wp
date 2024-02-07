@@ -36,3 +36,4 @@ for product in all_data:
     print("\n")
 
 print(datetime.datetime.now())
+print(all_data)
