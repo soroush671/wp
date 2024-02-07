@@ -446,7 +446,7 @@
     </routine>
     <schema id="177" parent="1" name="main">
       <Current>1</Current>
-      <LastIntrospectionLocalTimestamp>2024-02-07.06:47:36</LastIntrospectionLocalTimestamp>
+      <LastIntrospectionLocalTimestamp>2024-02-07.08:39:45</LastIntrospectionLocalTimestamp>
     </schema>
     <argument id="178" parent="16">
       <ArgumentDirection>R</ArgumentDirection>
@@ -1626,16 +1626,20 @@
       <NotNull>1</NotNull>
       <Position>4</Position>
     </column>
-    <index id="558" parent="522" name="sqlite_autoindex_user_1">
+    <column id="558" parent="522" name="registered_on">
+      <DasType>DATETIME|0s</DasType>
+      <Position>5</Position>
+    </column>
+    <index id="559" parent="522" name="sqlite_autoindex_user_1">
       <ColNames>username</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <Unique>1</Unique>
     </index>
-    <key id="559" parent="522">
+    <key id="560" parent="522">
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="560" parent="522">
+    <key id="561" parent="522">
       <ColNames>username</ColNames>
       <UnderlyingIndexName>sqlite_autoindex_user_1</UnderlyingIndexName>
     </key>
