@@ -14,13 +14,13 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(30), unique=True, nullable=False)
     password = db.Column(db.String(30), nullable=False)
     shop_name = db.Column(db.String(30), nullable=False)
-    registered_on = db.Column(db.DateTime, default=datetime.datetime.now)
+    # registered_on = db.Column(db.DateTime, default=datetime.datetime.now)
 
     def __init__(self, username, password, shop_name):
         self.username = username
         self.password = password
         self.shop_name = shop_name
-        self.registered_on = datetime.datetime.now()
+        # self.registered_on = datetime.datetime.now()
 
     def __repr__(self):
         return '<User {0}>'.format(self.username)
