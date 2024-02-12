@@ -225,7 +225,7 @@ lzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"
 
                                       {% for brand in brands %}
                                     <li>
-                                        <a href="shop-banner-sidebar.php?category_id=<?= $value->Category_ID ?>">
+                                        <a href="shop-banner-sidebar.html?category_id=<?= $value->Category_ID ?>">
                                             <i class="w-icon-heartbeat"></i>{{ brand.name }} </a>
                                     </li>
                                     {% endfor %}
@@ -261,10 +261,7 @@ lzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"
 <body>
 
 {% block content %}
-{% for mobile in mobile_numbers %}
-    {{ mobile }}
-{% endfor %}
-{{customer_data}}
+
 {% endblock %}
 </body>
 <!-- Start of Footer -->
@@ -434,7 +431,7 @@ lzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"
                 <ul class="mobile-menu">
                     <?php foreach ($getAllCategory as $category): ?>
                     <li>
-                        <a href="shop-banner-sidebar.php?category_id=<?=$category->Category_ID?>">
+                        <a href="shop-banner-sidebar.html?category_id=<?=$category->Category_ID?>">
                             <i class="w-icon-tshirt2"></i><?= $category->Category_name; ?>
                         </a>
                     </li>
