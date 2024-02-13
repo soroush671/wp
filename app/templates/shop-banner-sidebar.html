@@ -7,7 +7,7 @@
                 <div class="container">
                     <ul class="breadcrumb bb-no">
                         <li><a href="<?=BASE_URL?>">خانه </a></li>
-                        <li><?=$category[0]->Category_name;?></li>
+                        <li>{{brand_name}}</li>
                     </ul>
                 </div>
             </nav>
@@ -20,83 +20,10 @@
                     <div class="shop-default-banner banner d-flex align-items-center mb-5 br-xs"
                         style="background-image: url(assets/images/shop/banner1.jpg); background-color: #FFC74E;">
                         <div class="banner-content">
-                            <!-- <h4 class="banner-subtitle font-weight-bold">مجموعه لوازم جانبی </h4>
-                            <h3 class="banner-title text-white text-uppercase font-weight-bolder ls-normal">ساعت مچی هوشمند</h3>
-                            <a href="shop-banner-sidebar.html" class="btn btn-dark btn-rounded btn-icon-right">اکنون کشف کنید<i class="w-icon-long-arrow-left"></i></a> -->
+
                         </div>
                     </div>
-                    <!-- End of Shop Banner -->
 
-                    <!-- <div class="shop-default-brands mb-5">
-                        <div class="brands-swiper swiper-container swiper-theme "
-                            data-swiper-options="{
-                                'slidesPerView': 2,
-                                'breakpoints': {
-                                    '576': {
-                                        'slidesPerView': 3
-                                    },
-                                    '768': {
-                                        'slidesPerView': 4
-                                    },
-                                    '992': {
-                                        'slidesPerView': 6
-                                    },
-                                    '1200': {
-                                        'slidesPerView': 7
-                                    }
-                                },
-                                'autoplay': {
-                                    'delay': 4000,
-                                    'disableOnInteraction': false
-                                }
-                            }">
-                            <div class="swiper-wrapper row gutter-no cols-xl-7 cols-lg-6 cols-md-4 cols-sm-3 cols-2">
-                                <div class="swiper-slide">
-                                    <figure>
-                                        <img src="assets/images/brands/category/1.png" alt="Brand" width="160" height="90" />
-                                    </figure>
-                                </div>
-                                <div class="swiper-slide">
-                                    <figure>
-                                        <img src="assets/images/brands/category/2.png" alt="Brand" width="160" height="90" />
-                                    </figure>
-                                </div>
-                                <div class="swiper-slide">
-                                    <figure>
-                                        <img src="assets/images/brands/category/3.png" alt="Brand" width="160" height="90" />
-                                    </figure>
-                                </div>
-                                <div class="swiper-slide">
-                                    <figure>
-                                        <img src="assets/images/brands/category/4.png" alt="Brand" width="160" height="90" />
-                                    </figure>
-                                </div>
-                                <div class="swiper-slide">
-                                    <figure>
-                                        <img src="assets/images/brands/category/5.png" alt="Brand" width="160" height="90" />
-                                    </figure>
-                                </div>
-                                <div class="swiper-slide">
-                                    <figure>
-                                        <img src="assets/images/brands/category/6.png" alt="Brand" width="160" height="90" />
-                                    </figure>
-                                </div>
-                                <div class="swiper-slide">
-                                    <figure>
-                                        <img src="assets/images/brands/category/7.png" alt="Brand" width="160" height="90" />
-                                    </figure>
-                                </div>
-                            </div>
-                            <div class="swiper-pagination"></div>
-                        </div>
-                    </div> -->
-                    <!-- End of Shop Brands-->
-
-                    <!-- Start of Shop Category -->
-                   
-                    <!-- End of Shop Category -->
-
-                    <!-- Start of Shop Content -->
                     <div class="shop-content row gutter-lg mb-10">
                         <!-- Start of Sidebar, Shop Sidebar -->
                         <aside class="sidebar shop-sidebar sticky-sidebar-wrapper sidebar-fixed">
@@ -118,7 +45,7 @@
                                         <ul class="widget-body filter-items search-ul">
                                             
                                         <li><a href="#">تجهیزات جانبی </a></li>
-                                           
+
                                         </ul>
                                     </div>
                                     <!-- End of Collapsible Widget -->
@@ -171,19 +98,19 @@
                                 </div>
                             </nav>
                             
-                        <div class="product-wrapper row cols-md-3 cols-sm-2 cols-2">  
-                        <?php foreach ($getAllProduct as $key => $product) : ?>     
+                        <div class="product-wrapper row cols-md-3 cols-sm-2 cols-2">
+                            {% for good in goods_data %}
                             <div class="product-wrap">
                                     <div class="product text-center">
                                         <figure class="product-media">
                                             <a href="product-default.php?menu_id=<?=$product->Menu_ID; ?>">
-                                                <img src="admin/<?= $product->Menu_image; ?>" alt="Product" width="300"
-                                                    height="338" />
+                                               <img src="{{ url_for('static', filename='upload/' + good[0] + '.jpg') }}"
+                                                    alt="Product" width="300" height="338" />
                                             </a>
                                             <!-- <div class="product-action-horizontal">
                                                 <a href="#" class="btn-product-icon btn-cart w-icon-cart"
                                                     title="افزودن به سبد "></a>
-                                                <a href="#" class="btn-product-icon btn-wishlist w-icon-heart"
+                                                <a href="#" class="btqqqn-product-icon btn-wishlist w-icon-heart"
                                                     title="علاقه مندیها"></a>
                                                 <a href="#" class="btn-product-icon btn-compare w-icon-compare"
                                                     title="مقایسه"></a>
@@ -196,7 +123,7 @@
                                                 <a href="shop-banner-sidebar.php"> </a>
                                             </div>
                                             <h3 class="product-name">
-                                                <a href="product-default.php?menu_id=<?=$product->Menu_ID; ?>"><?= $product->Menu_name?></a>
+                                                <a href="product-default.php?menu_id=<?=$product->Menu_ID; ?>">{{ good[1] }}</a>
                                             </h3>
                                             <div class="ratings-container">
                                                 <div class="ratings-full">
@@ -207,14 +134,14 @@
                                             </div>
                                             <div class="product-pa-wrapper">
                                                 <div class="product-price">
-                                                    <?= number_format( $product->Price); ?> تومان
+                                                    {{good[9]}} تومان
                                                 </div>
                                             </div>
                                         </div>
                                      </div>
                                 </div>
                             
-                                <?php endforeach; ?> 
+                                {% endfor %}
                             
                             
                             </div>

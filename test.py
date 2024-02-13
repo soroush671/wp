@@ -1,5 +1,6 @@
 from app import sql_server_cursor
 from app.models import User, Brand
+
 def good_list_finder():
     sql_server_query =("SELECT Zagros_Goods.*,"
                        " Zagros_StockGoods.[موجودی قابل سفارش با کسر درخواست های صادر نشده - کارتن]"

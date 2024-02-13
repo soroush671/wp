@@ -22,10 +22,6 @@ def home():
         return redirect(url_for('login'))
 
 
-def rows_to_dict(rows):
-    return [row.as_dict() for row in rows]
-
-
 @app.route("/login", methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
@@ -75,7 +71,10 @@ def loading():
     return render_template("loader.html", title="Loading")
 
 
-@app.route('/goods' , methods=['GET', 'POST'])
-# @login_required
-def goods():
-    return render_template("shop-banner-sidebar.html")
+@app.route('/goods/<brand_name>', methods=['GET', 'POST'])
+@login_required
+def goods(brand_name):
+    goods_data = good_list_finder()
+    brands = brand_finder()
+    return render_template("shop-banner-sidebar.html", goods_data=goods_data, brands=brands,
+                           brand_name=brand_name)
