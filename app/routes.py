@@ -78,3 +78,8 @@ def goods(brand_name):
     brands = brand_finder()
     return render_template("shop-banner-sidebar.html", goods_data=goods_data, brands=brands,
                            brand_name=brand_name)
+@app.route('/product', methods=['GET', 'POST'])
+@login_required
+def product():
+    brands = brand_finder()
+    return render_template('product-default.html', title="Product", brands=brands)
