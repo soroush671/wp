@@ -30,3 +30,13 @@ def good_list_finder():
                        "IS NOT NULL AND [مرکز توزیع]='شیراز' and [نام تجاری] ='Persil' ")
     result = sql_server_cursor.execute(sql_server_query).fetchall()
     return result
+
+
+def good_finder_by_id(id):
+    sql_server_query = (f"SELECT Zagros_Goods.*, "
+                        f"Zagros_StockGoods.[موجودی قابل سفارش با کسر درخواست های صادر نشده - کارتن]FROM Zagros_Goods "
+                        f"JOIN Zagros_StockGoods ON Zagros_Goods.[کد کالا] = Zagros_StockGoods.[کد کالا] "
+                        f"WHERE Zagros_StockGoods.[موجودی قابل سفارش با کسر درخواست های صادر نشده - کارتن] IS NOT NULL "
+                        f"AND [مرکز توزیع] = 'شیراز' AND Zagros_StockGoods.[کد کالا] = '{id}'")
+    result = sql_server_cursor.execute(sql_server_query).fetchall()
+    return result

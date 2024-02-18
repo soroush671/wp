@@ -4,7 +4,7 @@ from app.forms import LoginForm
 from app.API import send_verification_code
 from app.models import User
 import random
-from app.funcs import user_finder, brand_finder, good_list_finder
+from app.funcs import user_finder, brand_finder, good_list_finder, good_finder_by_id
 from flask_login import login_user, current_user, login_required, logout_user
 
 
@@ -71,15 +71,17 @@ def loading():
     return render_template("loader.html", title="Loading")
 
 
-@app.route('/goods/<brand_name>', methods=['GET', 'POST'])
+@app.route('/goods/', methods=['GET', 'POST'])
 @login_required
-def goods(brand_name):
+def goods():
     goods_data = good_list_finder()
     brands = brand_finder()
-    return render_template("shop-banner-sidebar.html", goods_data=goods_data, brands=brands,
-                           brand_name=brand_name)
-@app.route('/product', methods=['GET', 'POST'])
+    return render_template("shop-banner-sidebar.html", goods_data=goods_data, brands=brands)
+
+
+@app.route('/product/<product_id>', methods=['GET', 'POST'])
 @login_required
-def product():
+def product(product_id):
     brands = brand_finder()
-    return render_template('product-default.html', title="Product", brands=brands)
+    good = good_finder_by_id(product_id)
+    return render_template('product-default.html', title="Product", brands=brands, good=good)

@@ -6,7 +6,7 @@
             <nav class="breadcrumb-nav">
                 <div class="container">
                     <ul class="breadcrumb bb-no">
-                        <li><a href="<?=BASE_URL?>">خانه </a></li>
+                        <li><a href="{{ url_for('home')}}">خانه </a></li>
                         <li>{{brand_name}}</li>
                     </ul>
                 </div>
@@ -103,7 +103,7 @@
                             <div class="product-wrap">
                                     <div class="product text-center">
                                         <figure class="product-media">
-                                            <a href="product-default.html?menu_id=<?=$product->Menu_ID; ?>">
+                                            <a href="{{ url_for('product', product_id=good[0]) }}">
                                                <img src="{{ url_for('static', filename='upload/' + good[0] + '.jpg') }}"
                                                     alt="Product" width="300" height="338" />
                                             </a>
@@ -123,7 +123,7 @@
                                                 <a href="shop-banner-sidebar.php"> </a>
                                             </div>
                                             <h3 class="product-name">
-                                                <a href="product-default.html?menu_id=<?=$product->Menu_ID; ?>">{{ good[1] }}</a>
+                                                <a href="{{ url_for('product', product_id=good[0]) }}">{{ good[1] }}</a>
                                             </h3>
                                             <div class="ratings-container">
                                                 <div class="ratings-full">
