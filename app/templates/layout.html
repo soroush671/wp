@@ -15,24 +15,25 @@
     <!-- Favicon -->
     <link rel="icon" type="image/png" href=" {{ url_for('static', filename='css/images/Zagros-logo.png') }}">
     <link rel="stylesheet" type="text/css"
-      href="{{ url_for('static', filename='vendor/magnific-popup/magnific-popup.min.css') }}">
+          href="{{ url_for('static', filename='vendor/magnific-popup/magnific-popup.min.css') }}">
 
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendor/photoswipe/photoswipe.min.css') }}">
-<link rel="stylesheet" type="text/css"
-      href="{{ url_for('static', filename='vendor/photoswipe/default-skin/default-skin.min.css') }}">
+    <link rel="stylesheet" type="text/css"
+          href="{{ url_for('static', filename='vendor/photoswipe/photoswipe.min.css') }}">
+    <link rel="stylesheet" type="text/css"
+          href="{{ url_for('static', filename='vendor/photoswipe/default-skin/default-skin.min.css') }}">
 
-<!-- Default CSS -->
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style-rtl.min.css') }}">
+    <!-- Default CSS -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style-rtl.min.css') }}">
 
     <!-- Bootstrap 5 -->
-<!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"-->
-<!--          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">-->
-<!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFY-->
-<!--lzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>-->
+    <!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"-->
+    <!--          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">-->
+    <!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFY-->
+    <!--lzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>-->
     <!-- WebFont.js -->
     <script>
         WebFontConfig = {
-            google: { families: ['Poppins:400,600,500,700,800', 'Zeyada: 400'] }
+            google: {families: ['Poppins:400,600,500,700,800', 'Zeyada: 400']}
         };
         (function (d) {
             var wf = d.createElement('script'), s = d.scripts[0];
@@ -64,11 +65,7 @@
           href="{{ url_for('static', filename='vendor/magnific-popup/magnific-popup.min.css') }}">
 
     <!-- Default CSS -->
-    <link rel="stylesheet" type="text/css" href=" {{ url_for('static', filename='css/demo3.min.css') }} ">
-
-
-
-
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/demo3.min.css') }}">
 
 </head>
 
@@ -89,7 +86,7 @@
                     <a href="contact-us.html" class="d-lg-show">تماس با ما </a>
                     <a href="my-account.html" class="d-lg-show">حساب من </a>
                     <a href="assets/ajax/login.php" class="d-lg-show login sign-in"><i
-                            class="w-icon-account"></i><?=$_SESSION['login']->custname?></a>
+                            class="w-icon-account"></i>{{current_user.shop_name}}</a>
                     <span class="delimiter d-lg-show">/</span>
                     <a href="{{ url_for('logout') }}" class="ml-0 d-lg-show login"> خروج </a>
                     {% include "inc/messages.html" %}
@@ -148,15 +145,12 @@
                         <a href="cart.php" class="cart-toggle label-down link">
                             <i class="w-icon-cart">
                             <span class="cart-count">
-                                <?php if (isset($_SESSION['cart'])) :
-                                    $count = count($_SESSION['cart']);
-                                    echo $count;
+                                {% if session['cart'] %}
+                                    {{ session['cart']|length }}
+                                {% else %}
+                                    {{ 0 }}
+                                {% endif %}
 
-                                else :
-                                    echo "0";
-
-
-                                endif;  ?>
                             </span>
                             </i>
                         </a>
@@ -236,7 +230,7 @@
                                     <li>
 
 
-                                      {% for brand in brands %}
+                                        {% for brand in brands %}
                                     <li>
                                         <a href="shop-banner-sidebar.html?category_id=<?= $value->Category_ID ?>">
                                             <i class="w-icon-heartbeat"></i>{{ brand.name }} </a>
@@ -638,7 +632,7 @@
 <!-- Plugin JS File -->
 <script src="{{ url_for('static', filename='js/main.min.js') }} "></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-<script src="{{ url_for('static', filename='vendor/jquery/jquery.min.js') }} "></script>
+<!--<script src="{{ url_for('static', filename='vendor/jquery/jquery.min.js') }} "></script>-->
 <script src="{{ url_for('static', filename='vendor/parallax/parallax.min.js') }}"></script>
 <script src="{ url_for('static', filename='vendor/jquery.plugin/jquery.plugin.min.js') }}"></script>
 <script src="{{ url_for('static', filename='vendor/imagesloaded/imagesloaded.pkgd.min.js') }}"></script>
@@ -662,6 +656,7 @@
 
 <!-- Main JS File -->
 <script src="{{ url_for('static', filename='js/main.min.js') }}"></script>
+
 
 <!-- Main Js -->
 

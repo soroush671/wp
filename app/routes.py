@@ -85,3 +85,62 @@ def product(product_id):
     brands = brand_finder()
     good = good_finder_by_id(product_id)
     return render_template('product-default.html', title="Product", brands=brands, good=good)
+
+
+@app.route('/add', methods=['GET', 'POST'])
+@login_required
+def add():
+    price = request.form['code']
+    return price
+
+
+@app.route('/add-to-cart', methods=['POST'])
+def add_to_cart():
+    data = request.json
+    product_id = data['productCode']
+    product_name = data['productName']
+    product_price = data['productPrice']
+    quantity = data['productQuantity']
+    cart_item = {
+        'product_id': product_id,
+        'product_name': product_name,
+        'product_price': product_price,
+        'quantity': quantity,
+    }
+    if 'cart' not in session:
+        session['cart'] = []
+    for item in session['cart']:
+        if item['product_id'] == product_id:
+            return jsonify({'error': 'این ممحصول در سبد خرید وجود دارد'}), 400
+    session['cart'].append(cart_item)
+    return jsonify(session['cart'])
+
+
+
+
+
+@app.route('/remove-from-cart', methods=['POST'])
+def remove_from_cart():
+    product_id = request.form['product_id']
+    # اطلاعات سبد خرید را از جلسه بخوانید
+    if 'cart' not in session:
+        return jsonify([])
+    # محصول مورد نظر را از سبد خرید حذف کنید
+    session['cart'] = [item for item in session['cart'] if item['product_id'] != product_id]
+    return jsonify(session['cart'])
+
+
+@app.route('/cart')
+def cart():
+    # اطلاعات سبد خرید را از جلسه بخوانید
+    if 'cart' not in session:
+        return jsonify([])
+
+    return jsonify(session['cart'])
+
+@app.route('/clear-cart')
+def clear_cart():
+    # سبد خرید را از جلسه پاک کنید
+    session.pop('cart', None)
+
+    return jsonify([])
