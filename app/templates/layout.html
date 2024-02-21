@@ -142,7 +142,7 @@
                     </a>
                     <div class="dropdown cart-dropdown cart-offcanvas mr-0 mr-lg-4">
 
-                        <a href="cart.php" class="cart-toggle label-down link">
+                        <a href="{{ url_for('cart') }}" class="cart-toggle label-down link">
                             <i class="w-icon-cart">
                             <span class="cart-count">
                                 {% if session['cart'] %}
@@ -155,8 +155,8 @@
                             </i>
                         </a>
 
-                        <a href="cart.php" class="cart-toggle label-down link">
-                            <?= $_SESSION['login']->custname ?>
+                        <a href="cart.html" class="cart-toggle label-down link">
+
                         </a>
 
 
@@ -202,7 +202,7 @@
                                 <span class="price"><?= $total ?> تومان</span>
                             </div>
                             <div class="cart-action">
-                                <a href="cart.php" class="btn btn-dark btn-outline btn-rounded">سبد خرید </a>
+                                <a href="cart.html" class="btn btn-dark btn-outline btn-rounded">سبد خرید </a>
                                 <a href="checkout.php" class="btn btn-primary  btn-rounded">پرداخت </a>
                             </div>
                         </div>
@@ -367,7 +367,7 @@
         <p>حساب کاربری </p>
     </a>
     <div class="cart-dropdown dir-up">
-        <a href="cart.php" class="sticky-link">
+        <a href="cart.html" class="sticky-link">
             <i class="w-icon-cart"></i>
             <p>سبد خرید </p>
         </a>

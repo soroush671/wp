@@ -111,9 +111,12 @@ def add_to_cart():
         session['cart'] = []
     for item in session['cart']:
         if item['product_id'] == product_id:
-            return jsonify({'error': 'این ممحصول در سبد خرید وجود دارد'}), 400
+            return jsonify({'error': 'این محصول'}), 400
     session['cart'].append(cart_item)
+
+    session.modified = True  # اطمینان حاصل کنید که تغییرات در session ذخیره شده‌اند
     return jsonify(session['cart'])
+
 
 
 
@@ -136,7 +139,8 @@ def cart():
     if 'cart' not in session:
         return jsonify([])
 
-    return jsonify(session['cart'])
+    shop_cart = jsonify(session['cart'], title="سبد خرید")
+    return render_template('cart.html', shop_cart=shop_cart)
 
 @app.route('/clear-cart')
 def clear_cart():
@@ -144,3 +148,6 @@ def clear_cart():
     session.pop('cart', None)
 
     return jsonify([])
+
+
+
