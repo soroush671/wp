@@ -57,7 +57,6 @@ def login():
     return render_template("login.html", title="Login", form=form)
 
 
-
 @app.route('/logout')
 @login_required
 def logout():
@@ -118,10 +117,6 @@ def add_to_cart():
     return jsonify(session['cart'])
 
 
-
-
-
-
 @app.route('/remove-from-cart', methods=['POST'])
 def remove_from_cart():
     product_id = request.form['product_id']
@@ -133,21 +128,22 @@ def remove_from_cart():
     return jsonify(session['cart'])
 
 
-@app.route('/cart')
-def cart():
-    # اطلاعات سبد خرید را از جلسه بخوانید
-    if 'cart' not in session:
-        return jsonify([])
-
-    shop_cart = jsonify(session['cart'], title="سبد خرید")
-    return render_template('cart.html', shop_cart=shop_cart)
-
-@app.route('/clear-cart')
+@app.route('/clear_cart')
 def clear_cart():
+    brands = brand_finder()
     # سبد خرید را از جلسه پاک کنید
     session.pop('cart', None)
+    flash('سبد شما حذف شد .', 'success')
 
-    return jsonify([])
+    return render_template('cart.html', title="سبد خرید", brands=brands)
 
 
+@app.route('/cart')
+def cart():
+    brands = brand_finder()
+    # اطلاعات سبد خرید را از جلسه بخوانید
+    if 'cart' not in session:
+        return render_template('cart.html', title="سبد خرید", brands=brands)
 
+    # داده‌های سبد خرید را به عنوان آرگومان به تابع render_template ارسال کنید
+    return render_template('cart.html', shop_cart=session['cart'], title="سبد خرید", brands=brands)

@@ -155,7 +155,7 @@
                             </i>
                         </a>
 
-                        <a href="cart.html" class="cart-toggle label-down link">
+                        <a href="{{ url_for('cart') }}"  class="cart-toggle label-down link">
 
                         </a>
 
@@ -163,7 +163,7 @@
                         <div class="dropdown-box">
                             <div class="cart-header">
                                 <span>سبد خرید </span>
-                                <a href="#" class="btn-close">بستن <i class="w-icon-long-arrow-left"></i></a>
+                                <a href="{{ url_for('cart') }}"  class="btn-close">بستن <i class="w-icon-long-arrow-left"></i></a>
                             </div>
                             <?php $total = 0; ?>
                             <?php if (isset($_SESSION['cart'])) :
@@ -202,7 +202,7 @@
                                 <span class="price"><?= $total ?> تومان</span>
                             </div>
                             <div class="cart-action">
-                                <a href="cart.html" class="btn btn-dark btn-outline btn-rounded">سبد خرید </a>
+                                <a href="{{ url_for('cart') }}"  class="btn btn-dark btn-outline btn-rounded">سبد خرید </a>
                                 <a href="checkout.php" class="btn btn-primary  btn-rounded">پرداخت </a>
                             </div>
                         </div>
@@ -367,7 +367,7 @@
         <p>حساب کاربری </p>
     </a>
     <div class="cart-dropdown dir-up">
-        <a href="cart.html" class="sticky-link">
+        <a href="{{ url_for('cart') }}" class="sticky-link">
             <i class="w-icon-cart"></i>
             <p>سبد خرید </p>
         </a>
