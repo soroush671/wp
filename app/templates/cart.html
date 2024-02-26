@@ -65,6 +65,7 @@
                                                value="{{ cart_item['quantity'] }} کارتن">
                                     </div>
                                 </td>
+
                                 <td class="product-subtotal">
                                     {% set price = cart_item['product_price']|int %}
                                     {% set quantity = cart_item['quantity']|int %}
@@ -121,7 +122,7 @@
                                 <label>مجموع</label>
                                 <span class="ls-50"><?= number_format($total + $tax); ?> تومان</span>
                             </div>
-                            <a href="" id="accept" class="btn btn-block btn-dark btn-icon-right btn-rounded">
+                            <a href="{{ url_for('accept') }}"  class="btn btn-block btn-dark btn-icon-right btn-rounded">
                                 تائید و ارسال<i class="w-icon-long-arrow-left"></i></a>
 
                         </div>
@@ -141,33 +142,33 @@
 
 <script>
     $(document).ready(function () {
-        $('#accept').click(function (e) {
-            if (confirm('آیا از ثبت سفارش اطمینان دارید؟')) {
-                var your_selected_value = $('#select option:selected').val();
-                $.ajax({
-                    url: "",
-                    method: "post",
-                    data: {
-                        action: "accept",
-                        name: "<?= $_SESSION['login']->Username; ?>",
-                        order: "<?= $orderItem; ?>",
-                        payment_type: your_selected_value
-
-                    },
-                    success: function (response) {
-                        if (response = '1') {
-                            alert('سفارش شما با موفقیت ارسال شد');
-                            location.reload();
-                        } else {
-                            alert('خطا در حذف سفارش');
-                        }
-
-
-                    }
-                });
-            }
-
-        });
+        // $('#accept').click(function (e) {
+        //     if (confirm('آیا از ثبت سفارش اطمینان دارید؟')) {
+        //         var your_selected_value = $('#select option:selected').val();
+        //         $.ajax({
+        //             url: "",
+        //             method: "post",
+        //             data: {
+        //                 action: "accept",
+        //                 name: "<?= $_SESSION['login']->Username; ?>",
+        //                 order: "<?= $orderItem; ?>",
+        //                 payment_type: your_selected_value
+        //
+        //             },
+        //             success: function (response) {
+        //                 if (response = '1') {
+        //                     alert('سفارش شما با موفقیت ارسال شد');
+        //                     location.reload();
+        //                 } else {
+        //                     alert('خطا در حذف سفارش');
+        //                 }
+        //
+        //
+        //             }
+        //         });
+        //     }
+        //
+        // });
 
         $('#clear').click(function (e) {
             e.preventDefault();
@@ -184,7 +185,7 @@
 
                             location.reload();
                         }
-                        ;
+
 
 
                     }

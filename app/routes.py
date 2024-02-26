@@ -4,7 +4,7 @@ from app.forms import LoginForm
 from app.API import send_verification_code
 from app.models import User
 import random
-from app.funcs import user_finder, brand_finder, good_list_finder, good_finder_by_id
+from app.funcs import user_finder, brand_finder, good_list_finder, good_finder_by_id, create_order
 from flask_login import login_user, current_user, login_required, logout_user
 
 
@@ -133,8 +133,6 @@ def clear_cart():
     brands = brand_finder()
     # سبد خرید را از جلسه پاک کنید
     session.pop('cart', None)
-    flash('سبد شما حذف شد .', 'success')
-
     return render_template('cart.html', title="سبد خرید", brands=brands)
 
 
@@ -147,3 +145,10 @@ def cart():
 
     # داده‌های سبد خرید را به عنوان آرگومان به تابع render_template ارسال کنید
     return render_template('cart.html', shop_cart=session['cart'], title="سبد خرید", brands=brands)
+
+
+@app.route('/accept')
+def accept():
+    response = create_order(session['cart'])
+    flash(response, category='success')
+    return redirect(url_for('cart'))
