@@ -3,7 +3,6 @@ import datetime
 from flask_login import UserMixin
 
 
-
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get((user_id))
@@ -14,12 +13,14 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(30), unique=True, nullable=False)
     password = db.Column(db.String(30), nullable=False)
     shop_name = db.Column(db.String(30), nullable=False)
+    customer_id = db.Column(db.String(30), nullable=False)
     # registered_on = db.Column(db.DateTime, default=datetime.datetime.now)
 
-    def __init__(self, username, password, shop_name):
+    def __init__(self, username, password, shop_name, customer_id):
         self.username = username
         self.password = password
         self.shop_name = shop_name
+        self.customer_id = customer_id
         # self.registered_on = datetime.datetime.now()
 
     def __repr__(self):
@@ -59,4 +60,8 @@ class Product(db.Model):
 
     def __repr__(self):
         return f"<Product(id={self.id}, goods_name='{self.goods_name}', sale_price={self.sale_price})>"
+
+
+
+
 

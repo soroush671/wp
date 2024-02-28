@@ -5,15 +5,16 @@ import json
 
 
 def user_finder(user_id):
-    sql_server_query = f"SELECT * FROM Zagros_Customer WHERE [کد مشتری]='{user_id}'"
+    sql_server_query = f"SELECT * FROM Zagros_Customer2 WHERE [کد مشتری]='{user_id}'"
     result = sql_server_cursor.execute(sql_server_query).fetchall()
     if result:
         user_data = result[0]  # گرفتن اولین رکورد از نتیجه
         mobile_number = user_data[5]  # فرضاً موبایل در ستون ششم قرار دارد
         user_id = user_data[0]
         shop_name = user_data[2]
+        customer_id = user_data[30]
 
-        return User(username=user_id, password=mobile_number, shop_name=shop_name)
+        return User(username=user_id, password=mobile_number, shop_name=shop_name, customer_id=customer_id)
     else:
         return None
 
@@ -46,9 +47,8 @@ def good_finder_by_id(id):
     return result
 
 
-def create_order(cart_items):
+def create_order(cart_items, customer_id):
     url = "http://vnapishz.zagros-grp.com:9096/api/ThirdPartyOrderAPI/CreateOrder?actiontype=1"
-
     # ایجاد لیستی از دیکشنری‌ها که معادل orderitems است
     orderitems = []
     for item in cart_items:
@@ -58,7 +58,7 @@ def create_order(cart_items):
             "OrderDate": "1402/12/05",
             "StockId": 1,
             "OrderTypeId": 2,
-            "CustomerId": 50034081,
+            "CustomerId": customer_id,
             "PaymentUsanceId": 1,
             "SalesmanId": 2974,
             "OrderComment": "test",

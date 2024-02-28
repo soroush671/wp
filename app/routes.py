@@ -34,7 +34,7 @@ def login():
             password = user.password
             if password == form.password.data:
                 # goods_data = good_list_finder()
-                # session['goods_data'] = goods_data
+                session['customer'] = user.customer_id
                 login_user(user)
                 return redirect(url_for('home'))
             else:
@@ -43,10 +43,13 @@ def login():
             customer_data = user_finder(username)
             if customer_data:
                 password = customer_data.password
+                customer_id = customer_data.customer_id
                 if password == form.password.data:
-                    user = User(username=customer_data.username, password=password, shop_name=customer_data.shop_name)
+                    user = User(username=customer_data.username, password=password, shop_name=customer_data.shop_name,
+                                customer_id=customer_id)
                     db.session.add(user)
                     db.session.commit()
+                    session['customer'] = user.customer_id
                     # goods_data = good_list_finder()
                     # session['goods_data'] = goods_data
                     login_user(user)
@@ -112,7 +115,6 @@ def add_to_cart():
         if item['product_id'] == product_id:
             return jsonify({'error': 'این محصول'}), 400
     session['cart'].append(cart_item)
-
     session.modified = True  # اطمینان حاصل کنید که تغییرات در session ذخیره شده‌اند
     return jsonify(session['cart'])
 
@@ -149,6 +151,7 @@ def cart():
 
 @app.route('/accept')
 def accept():
-    response = create_order(session['cart'])
+    response = create_order(session['cart'], session['customer'])
     flash(response, category='success')
+    session.pop('cart', None)
     return redirect(url_for('cart'))
