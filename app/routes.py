@@ -178,7 +178,7 @@ def discount():
         response = preview_order(orders, session['customer'])
         flash(response, category='success')
         session.pop('orderId', None)
-        return redirect(url_for('cart'))
+        return render_template('discount.html')
     else:
         flash('سفارشی وجود ندارد', category='danger')
     return redirect(url_for('cart'))

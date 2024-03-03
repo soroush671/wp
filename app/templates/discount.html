@@ -1,0 +1,29 @@
+ <h1>Cart</h1>
+    <table>
+        <tr>
+            <th>ProductId</th>
+            <th>Quantity</th>
+            <th>UnitPrice</th>
+            <th>Amount</th>
+            <th>Discount</th>
+            <th>AmountAfterDiscount</th>
+            <th>AddAmount</th>
+            <th>NetAmount</th>
+            <th>IsPrize</th>
+            <th>ResultMsg</th>
+        </tr>
+        {% for item in response['PreviewOrder'] %}
+            <tr>
+                <td>{{ item['ProductId'] }}</td>
+                <td>{{ item['Quantity'] }}</td>
+                <td>{{ item['UnitPrice'] }}</td>
+                <td>{{ item['Amount'] }}</td>
+                <td>{{ item['Discount'] }}</td>
+                <td>{{ item['AmountAfterDiscount'] }}</td>
+                <td>{{ item['AddAmount'] }}</td>
+                <td>{{ item['NetAmount'] }}</td>
+                <td>{{ item['IsPrize'] }}</td>
+                <td>{{ item['ResultMsg'] }}</td>
+            </tr>
+        {% endfor %}
+    </table>
