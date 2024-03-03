@@ -2,9 +2,9 @@ from flask import Flask, render_template, request, redirect, url_for, flash, ses
 from app import app, db
 from app.forms import LoginForm
 from app.API import send_verification_code
-from app.models import User
+from app.models import User, Order
 import random
-from app.funcs import user_finder, brand_finder, good_list_finder, good_finder_by_id, create_order
+from app.funcs import user_finder, brand_finder, good_list_finder, good_finder_by_id, create_order, preview_order
 from flask_login import login_user, current_user, login_required, logout_user
 
 
@@ -97,6 +97,7 @@ def add():
 
 
 @app.route('/add-to-cart', methods=['POST'])
+@login_required
 def add_to_cart():
     data = request.json
     product_id = data['productCode']
@@ -120,6 +121,7 @@ def add_to_cart():
 
 
 @app.route('/remove-from-cart', methods=['POST'])
+@login_required
 def remove_from_cart():
     product_id = request.form['product_id']
     # اطلاعات سبد خرید را از جلسه بخوانید
@@ -131,6 +133,7 @@ def remove_from_cart():
 
 
 @app.route('/clear_cart')
+@login_required
 def clear_cart():
     brands = brand_finder()
     # سبد خرید را از جلسه پاک کنید
@@ -139,6 +142,7 @@ def clear_cart():
 
 
 @app.route('/cart')
+@login_required
 def cart():
     brands = brand_finder()
     # اطلاعات سبد خرید را از جلسه بخوانید
@@ -150,8 +154,31 @@ def cart():
 
 
 @app.route('/accept')
+@login_required
 def accept():
-    response = create_order(session['cart'], session['customer'])
-    flash(response, category='success')
+    response_dict = create_order(session['cart'], session['customer'])
+    order_id = response_dict['ReturnData'][0]['ExtraInfo1']
+    for item in session['cart']:
+        order = Order(customer_id=session['customer'], order_id=order_id, quantity=item['quantity'],
+                      price=item['product_price'],goods_id=item['product_id'], goods_name=item['product_name'])
+        db.session.add(order)
+        db.session.commit()
+    flash(response_dict['ReturnData'][0]['ResultMessage'], category='success')
+    session['orderId'] = order_id
     session.pop('cart', None)
+    return redirect(url_for('cart'))
+
+
+@app.route('/discount')
+@login_required
+def discount():
+    order_id = session.get('orderId')  # دریافت مقدار کلید orderId از دیکشنری session
+    if order_id is not None:
+        orders = Order.query.filter_by(order_id=order_id)
+        response = preview_order(orders, session['customer'])
+        flash(response, category='success')
+        session.pop('orderId', None)
+        return redirect(url_for('cart'))
+    else:
+        flash('سفارشی وجود ندارد', category='danger')
     return redirect(url_for('cart'))

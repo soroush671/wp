@@ -40,6 +40,29 @@ class Brand(db.Model):
         return '<Brand: {0}>'.format(self.name)
 
 
+class Order(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    customer_id = db.Column(db.String(30))
+    order_id = db.Column(db.String(10))
+    goods_id = db.Column(db.String(30))
+    goods_name = db.Column(db.String(30))
+    quantity = db.Column(db.Integer)
+    price = db.Column(db.Float)
+    created_at = db.Column(db.DateTime, default=datetime)
+
+    def __init__(self, customer_id, order_id, goods_id, goods_name, quantity, price):
+        self.customer_id = customer_id
+        self.order_id = order_id
+        self.goods_id = goods_id
+        self.goods_name = goods_name
+        self.price = price
+        self.quantity = quantity
+        self.created_at = datetime.datetime.now()
+
+    def __repr__(self):
+        return '<Order {0}>'.format(self.order_number)
+
+
 class Product(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     goods_ref = db.Column(db.Integer)

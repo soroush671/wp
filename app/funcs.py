@@ -1,7 +1,8 @@
 from app import sql_server_cursor
-from app.models import User, Brand
+from app.models import User, Brand, Order
 import requests
 import json
+from flask import session
 
 
 def user_finder(user_id):
@@ -55,7 +56,7 @@ def create_order(cart_items, customer_id):
         orderitems.append({
             "ReferenceKey": "",
             "ReferenceNo": "",
-            "OrderDate": "1402/12/05",
+            "OrderDate": "1402/12/10",
             "StockId": 1,
             "OrderTypeId": 2,
             "CustomerId": customer_id,
@@ -92,6 +93,46 @@ def create_order(cart_items, customer_id):
 
     response = requests.request("POST", url, headers=headers, data=payload)
 
+    return response.json()
+
+
+def preview_order(order, customer_id):
+    url = "http://vnapishz.zagros-grp.com:9096/api/ThirdPartyOrderAPI/PreviewOrder"
+
+    orderitems = []
+    for item in order:
+        orderitems.append({
+            "ReferenceKey": item.order_id,
+            "ReferenceNo": item.order_id,
+            "OrderDate": "1402/11/29",
+            "StockId": 1,
+            "OrderTypeId": 2,
+            "CustomerId": customer_id,
+            "PaymentUsanceId": 2,
+            "SalesmanId": 2974,
+            "OrderComment": "test",
+            "ProductId": item.goods_id,
+            "BatchNoId": "",
+            "Quantity": item.quantity,
+            "ItemComment": ""
+        })
+
+    payload = json.dumps({"orderitems": orderitems})
+    headers = {
+        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6InZhcmFuZWdhciIsImZ1b'
+                         'GxuYW1lIjoi2YjYsdin2Ybar9ixIiwibmJmIjoxNzAzOTE1NDI2LCJleHAiOjE3MDY1MDc0MjYsImlhdCI6MTcwMzkxNT'
+                         'QyNiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo0NDM4NSIsImF1ZCI6InRoaXJkcGFydHlVc2VyIn0.djVWn5971u92Hwg'
+                         'MZpV9aZ8_AA9y3UE0c9Dnj-GqiaM',
+        'AccYear': '1401',
+        'CenterId': '3',
+        'SaleOfficeId': '1',
+        'Language': 'en',
+        'Content-Type': 'application/json'
+    }
+
+    response = requests.request("POST", url, headers=headers, data=payload)
+
     return response.text
+
 
 
