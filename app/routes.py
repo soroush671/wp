@@ -6,6 +6,7 @@ from app.models import User, Order
 import random
 from app.funcs import user_finder, brand_finder, good_list_finder, good_finder_by_id, create_order, preview_order
 from flask_login import login_user, current_user, login_required, logout_user
+import json
 
 
 
@@ -160,7 +161,7 @@ def accept():
     order_id = response_dict['ReturnData'][0]['ExtraInfo1']
     for item in session['cart']:
         order = Order(customer_id=session['customer'], order_id=order_id, quantity=item['quantity'],
-                      price=item['product_price'],goods_id=item['product_id'], goods_name=item['product_name'])
+                      price=item['product_price'], goods_id=item['product_id'], goods_name=item['product_name'])
         db.session.add(order)
         db.session.commit()
     flash(response_dict['ReturnData'][0]['ResultMessage'], category='success')
@@ -176,9 +177,10 @@ def discount():
     if order_id is not None:
         orders = Order.query.filter_by(order_id=order_id)
         response = preview_order(orders, session['customer'])
+        response_dict = json.loads(response)
         flash(response, category='success')
         session.pop('orderId', None)
-        return render_template('discount.html')
+        return render_template('discount.html', response=response_dict)
     else:
         flash('سفارشی وجود ندارد', category='danger')
     return redirect(url_for('cart'))

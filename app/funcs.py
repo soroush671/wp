@@ -25,7 +25,7 @@ def brand_finder():
     return brand
 
 
-def good_list_finder():
+def good_list_finder_old():
     sql_server_query =(f"SELECT Zagros_Goods.*,"
                        " Zagros_StockGoods.[موجودی قابل سفارش با کسر درخواست های صادر نشده - کارتن],"
                        "Zagros_StockGoods.[شناسه کالا]FROM Zagros_Goods"
@@ -33,17 +33,24 @@ def good_list_finder():
                        " WHERE Zagros_StockGoods.[موجودی قابل سفارش با کسر درخواست های صادر نشده - کارتن] "
                        "IS NOT NULL AND [مرکز توزیع]='شیراز' and [نام تجاری] ='Persil' ")
 
+
+def good_list_finder():
+    sql_server_query =(f"SELECT  Zagros_Goods2.*, Zagros_StockGoods.[تعداد کل - کارتن],Zagros_StockGoods.[شناسه کالا]"
+                       f"FROM Zagros_Goods2 JOIN Zagros_StockGoods ON Zagros_Goods2.[کد کالا] = Zagros_StockGoods.[کد کالا]"
+                       f" WHERE Zagros_StockGoods.[تعداد کل - کارتن] > 0.5 AND [نام تجاری] ='Persil' "
+                       f"AND CustCtgrRef is null AND CustActRef is null AND CustRef is null"
+                       f" and [نام انبار]='انبار لاين 1 شيراز'ORDER BY [کد کالا]")
+
     result = sql_server_cursor.execute(sql_server_query).fetchall()
     return result
 
 
 def good_finder_by_id(id):
-    sql_server_query = (f"SELECT Zagros_Goods.*,"
-                        f"Zagros_StockGoods.[موجودی قابل سفارش با کسر درخواست های صادر نشده - کارتن],"
-                        f"Zagros_StockGoods.[شناسه کالا]FROM Zagros_Goods JOIN Zagros_StockGoods ON "
-                        f"Zagros_Goods.[کد کالا] = Zagros_StockGoods.[کد کالا]WHERE "
-                        f"Zagros_StockGoods.[موجودی قابل سفارش با کسر درخواست های صادر نشده - کارتن] IS NOT NULL"
-                        f" AND [مرکز توزیع] = 'شیراز' AND Zagros_StockGoods.[شناسه کالا] ='{id}'")
+    sql_server_query = (f"SELECT  Zagros_Goods2.*, Zagros_StockGoods.[تعداد کل - کارتن],Zagros_StockGoods.[شناسه کالا]"
+                       f"FROM Zagros_Goods2 JOIN Zagros_StockGoods ON Zagros_Goods2.[کد کالا] = Zagros_StockGoods.[کد کالا]"
+                       f" WHERE Zagros_StockGoods.[تعداد کل - کارتن] > 0.5 AND [نام تجاری] ='Persil' "
+                       f"AND CustCtgrRef is null AND CustActRef is null AND CustRef is null"
+                       f" and [نام انبار]='انبار لاين 1 شيراز' AND Zagros_StockGoods.[شناسه کالا] ='{id}'")
     result = sql_server_cursor.execute(sql_server_query).fetchall()
     return result
 
@@ -56,7 +63,7 @@ def create_order(cart_items, customer_id):
         orderitems.append({
             "ReferenceKey": "",
             "ReferenceNo": "",
-            "OrderDate": "1402/12/10",
+            "OrderDate": "1402/12/14",
             "StockId": 1,
             "OrderTypeId": 2,
             "CustomerId": customer_id,
@@ -104,7 +111,7 @@ def preview_order(order, customer_id):
         orderitems.append({
             "ReferenceKey": item.order_id,
             "ReferenceNo": item.order_id,
-            "OrderDate": "1402/11/29",
+            "OrderDate": "1402/12/14",
             "StockId": 1,
             "OrderTypeId": 2,
             "CustomerId": customer_id,

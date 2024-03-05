@@ -103,7 +103,7 @@
                             <div class="product-wrap">
                                     <div class="product text-center">
                                         <figure class="product-media">
-                                            <a href="{{ url_for('product', product_id=good[11]) }}">
+                                            <a href="{{ url_for('product', product_id=good[61]) }}">
                                                <img src="{{ url_for('static', filename='upload/' + good[0] + '.jpg') }}"
                                                     alt="Product" width="300" height="338" />
                                             </a>
@@ -120,21 +120,22 @@
                                         </figure>
                                         <div class="product-details">
                                             <div class="product-cat">
-                                                <a href="shop-banner-sidebar.php"> </a>
+                                                <a href=""> </a>
                                             </div>
                                             <h3 class="product-name">
-                                                <a href="{{ url_for('product', product_id=good[11]) }}">{{ good[11] }}</a>
+                                                <a href="{{ url_for('product', product_id=good[11]) }}">{{ good[1] }}</a>
                                             </h3>
                                             <div class="ratings-container">
                                                 <div class="ratings-full">
-                                                    <span class="ratings" style="width: 100%;"></span>
+                                                    <span class="ratings" style="width: 100%;">{{good[1]}}</span>
                                                     <span class="tooltiptext tooltip-top"></span>
                                                 </div>
-                                                <a href="product-default.html?menu_id=<?=$product->Menu_ID; ?>" class="rating-reviews">(3 نظر )</a>
+                                                <a href="" class="rating-reviews">(3 نظر )</a>
                                             </div>
                                             <div class="product-pa-wrapper">
                                                 <div class="product-price">
-                                                    {{good[9]}} تومان
+                                                    {% set price = good[21] * good[8] %}
+                                                    {{ price }} ریال
                                                 </div>
                                             </div>
                                         </div>

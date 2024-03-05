@@ -1,29 +1,48 @@
- <h1>Cart</h1>
-    <table>
-        <tr>
-            <th>ProductId</th>
-            <th>Quantity</th>
-            <th>UnitPrice</th>
-            <th>Amount</th>
-            <th>Discount</th>
-            <th>AmountAfterDiscount</th>
-            <th>AddAmount</th>
-            <th>NetAmount</th>
-            <th>IsPrize</th>
-            <th>ResultMsg</th>
-        </tr>
-        {% for item in response['PreviewOrder'] %}
-            <tr>
-                <td>{{ item['ProductId'] }}</td>
-                <td>{{ item['Quantity'] }}</td>
-                <td>{{ item['UnitPrice'] }}</td>
-                <td>{{ item['Amount'] }}</td>
-                <td>{{ item['Discount'] }}</td>
-                <td>{{ item['AmountAfterDiscount'] }}</td>
-                <td>{{ item['AddAmount'] }}</td>
-                <td>{{ item['NetAmount'] }}</td>
-                <td>{{ item['IsPrize'] }}</td>
-                <td>{{ item['ResultMsg'] }}</td>
-            </tr>
-        {% endfor %}
-    </table>
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>جدول خوشگل</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <h1>Cart</h1>
+    <div class="container">
+        <table class="table table-bordered table-striped table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th scope="col">کد محصول</th>
+                    <th scope="col">تعداد</th>
+                    <th scope="col">قیمت واحد</th>
+                    <th scope="col">مبلغ</th>
+                    <th scope="col">تخفیف</th>
+                    <th scope="col">مبلغ پس از تخفیف</th>
+                    <th scope="col">مبلغ اضافی</th>
+                    <th scope="col">مبلغ نهایی</th>
+                    <th scope="col">جایزه</th>
+                    <th scope="col">پیام نتیجه</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in response['PreviewOrder'] %}
+                    <tr>
+                        <td>{{ item['ProductId'] }}</td>
+                        <td>{{ item['Quantity'] }}</td>
+                        <td>{{ item['UnitPrice'] }}</td>
+                        <td>{{ item['Amount'] }}</td>
+                        <td>{{ item['Discount'] }}</td>
+                        <td>{{ item['AmountAfterDiscount'] }}</td>
+                        <td>{{ item['AddAmount'] }}</td>
+                        <td>{{ item['NetAmount'] }}</td>
+                        <td>{{ item['IsPrize'] }}</td>
+                        <td>{{ item['ResultMsg'] }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
+

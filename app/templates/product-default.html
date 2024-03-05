@@ -38,7 +38,7 @@
                                                  aria-label="1 / 6" style="width: 455px;">
                                                 <figure class="product-image"
                                                         style="position: relative; overflow: hidden; cursor: pointer;">
-                                                    <img src="assets/images/products/default/1-800x900.jpg"
+                                                    <img src="{{ url_for('static', filename='upload/' + good[0][0] + '.jpg') }}"
                                                          data-zoom-image="assets/images/products/default/1-800x900.jpg"
                                                          alt="ساعت مچی مشکی الکترونیکی" width="800" height="900">
                                                     <img role="presentation" alt="ساعت مچی مشکی الکترونیکی"
@@ -106,7 +106,7 @@
                                                     <img src="assets/images/products/default/6-800x900.jpg"
                                                          data-zoom-image="assets/images/products/default/6-800x900.jpg"
                                                          alt="ساعت مچی مشکی الکترونیکی" width="800" height="900">
-                                                    <img role="presentation" alt="ساعت مچی مشکی الکترونیکی"
+                                                    <img role="presentation" alt=""
                                                          src="file:///C:/Users/soroush.ZAGROS-HQ/Downloads/198391-main-1.1.0.4/wolmart/wolmart-html/wolmart-html/assets/images/products/default/6-800x900.jpg"
                                                          class="zoomImg"
                                                          style="position: absolute; top: 0px; left: 0px; opacity: 0; width: 880px; height: 990px; border: none; max-width: none; max-height: none;">
@@ -148,13 +148,14 @@
                                     <h1 class="product-title">{{ good[0][1]}}</h1>
                                     <div class="product-bm-wrapper">
                                         <figure class="brand">
-                                            <img src="assets/images/products/brand/brand-1.jpg" alt="Brand" width="102"
+                                            <img src="{{ url_for('static', filename='upload/' + good[0][0] + '.jpg') }}"
+                                                 alt="Brand" width="102"
                                                  height="48">
                                         </figure>
                                         <div class="product-meta">
                                             <div class="product-categories">
                                                 دسته بندی:
-                                                <span class="product-category"><a href="#">الکترونیک </a></span>
+                                                <!--                                                <span class="product-category"><a href="#">الکترونیک </a></span>-->
                                             </div>
                                             <div class="product-sku">
                                                 کد: <span>MS46891340</span>
@@ -163,9 +164,9 @@
                                     </div>
 
                                     <hr class="product-divider">
-
+                                    {% set price = good[0][21] * good[0][8] %}
                                     <div class="product-price">
-                                        <ins class="new-price">{{ good[0][8]}} تومان</ins>
+                                        <ins class="new-price">{{ price }} تومان</ins>
                                     </div>
 
                                     <div class="ratings-container">
@@ -179,16 +180,8 @@
 
                                     <div class="product-short-desc">
                                         <ul class="list-type-check list-style-none">
-                                            <li>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده
-                                                از طراحان گرافیک است. با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از
-                                                طراحان گرافیک است..
-                                            </li>
-                                            <li>چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و
-                                                برای شرایط فعلی.
-                                            </li>
-                                            <li>مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل
-                                                دنیای موجود طراحی اساسا مورد استفاده قرار گیرد..
-                                            </li>
+                                            <li>{{ good[0][1]}}</li>
+
                                         </ul>
                                     </div>
 
@@ -225,8 +218,9 @@
                                                         <button class="quantity-minus w-icon-minus"></button>
                                                     </div>
                                                 </div>
-                                                <input class="goodCode" type="hidden" value="{{ good[0][11] }}">
-                                                <input class="goodPrice" type="hidden" value="{{ good[0][9] }}">
+
+                                                <input class="goodCode" type="hidden" value="{{ good[0][61] }}">
+                                                <input class="goodPrice" type="hidden" value="{{ price }}">
                                                 <input class="goodName" type="hidden" value="{{ good[0][1] }}">
                                                 <button class="btn btn-primary btn-cart enabled" type="submit"
                                                         id="addtocard" onclick="addToCart()">
@@ -367,7 +361,7 @@
             }),
             success: function (response) {
                 console.log(response);
-                 alert('محصول با موفقیت به سبد خرید شما اضافه شد.');
+                alert('محصول با موفقیت به سبد خرید شما اضافه شد.');
             },
             error: function (xhr, status, error) {
                 console.error(error);
