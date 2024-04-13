@@ -14,7 +14,7 @@ app.config['SECRET_KEY'] = 'c5c146f9af44e21a607187560ea61ee5'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///../db.db'
 #  Connect SQL Server
 sql_server_engine = create_engine(
-    'mssql+pyodbc://sa:Z@gros@PB@172.25.10.16/ZAGROSDW',
+    'mssql+pyodbc://sa:ZagrosVN1398@172.25.10.10/',
     connect_args={'driver': 'SQL Server'}
 )
 db = SQLAlchemy(app)
@@ -26,7 +26,7 @@ login_manager = LoginManager(app)
 login_manager.login_view = 'login'
 login_manager.login_message = 'برای مشاهده این قسمت ابتدا وارد شوید'
 login_manager.login_message_category = 'error'
-sql_server_conn_str = 'DRIVER={SQL Server};SERVER=172.25.10.16;DATABASE=ZAGROSDW;UID=sa;PWD=Z@gros@PB'
+sql_server_conn_str = 'DRIVER={SQL Server};SERVER=172.25.10.10;DATABASE=DSDB_CN_New;UID=sa;PWD=ZagrosVN1398'
 sql_server_conn = pyodbc.connect(sql_server_conn_str)
 sql_server_cursor = sql_server_conn.cursor()
 

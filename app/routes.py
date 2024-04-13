@@ -16,8 +16,8 @@ import json
 def home():
     if current_user.is_authenticated:
         brands = brand_finder()
-        goods_data = good_list_finder()  # ذخیره کردن goods_data_dict در جلسه
-        return render_template('demo3.html', title="zagros", brands=brands, goods_data=goods_data)
+        # goods_data = good_list_finder()  # ذخیره کردن goods_data_dict در جلسه
+        return render_template('demo3.html', title="zagros", brands=brands)
     else:
         # اگر کاربر لاگین نکرده باشد، به صفحه لاگین هدایت کنید
         return redirect(url_for('login'))

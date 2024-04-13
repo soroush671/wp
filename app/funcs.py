@@ -35,11 +35,11 @@ def good_list_finder_old():
 
 
 def good_list_finder():
-    sql_server_query =(f"SELECT  Zagros_Goods2.*, Zagros_StockGoods.[تعداد کل - کارتن],Zagros_StockGoods.[شناسه کالا]"
+    sql_server_query = ("SELECT  Zagros_Goods2.*, Zagros_StockGoods.[تعداد کل - کارتن],Zagros_StockGoods.[شناسه کالا]"
                        f"FROM Zagros_Goods2 JOIN Zagros_StockGoods ON Zagros_Goods2.[کد کالا] = Zagros_StockGoods.[کد کالا]"
-                       f" WHERE Zagros_StockGoods.[تعداد کل - کارتن] > 0.5 AND [نام تجاری] ='Persil' "
+                       f"WHERE Zagros_StockGoods.[تعداد کل - کارتن] > 0.5 AND [نام تجاری] ='Persil' "
                        f"AND CustCtgrRef is null AND CustActRef is null AND CustRef is null"
-                       f" and [نام انبار]='انبار لاين 1 شيراز'ORDER BY [کد کالا]")
+                       f"and [نام انبار]='انبار لاين 1 شيراز'ORDER BY [کد کالا]")
 
     result = sql_server_cursor.execute(sql_server_query).fetchall()
     return result
@@ -63,7 +63,7 @@ def create_order(cart_items, customer_id):
         orderitems.append({
             "ReferenceKey": "",
             "ReferenceNo": "",
-            "OrderDate": "1402/12/14",
+            "OrderDate": "1403/01/14",
             "StockId": 1,
             "OrderTypeId": 2,
             "CustomerId": customer_id,

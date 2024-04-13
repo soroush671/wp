@@ -1,37 +1,7 @@
 
-G
-online_shop/__init__.py,0\a\0a1af72d2bb9677ace2d1b3c62be878f2514f163
 6
 run.py,8\0\806d6ceb4e60342798038124ccf7dc1a423a4433
-E
-online_shop/routes.py,1\7\17885a2a32359c5ac22b2774caba0d1f715157a3
-Q
-!online_shop/templates/layout.html,1\4\14ab2c9f8d41da0dffb1497a40577dc88203a338
-W
-'online_shop/templates/inc/messages.html,3\c\3cae790868354deca369cc36fd7fea024e3c29a0
-T
-$online_shop/static/css/demo3.min.css,7\6\76ff6f8e9904742494e5e03d3e06e68a31298758
-W
-'online_shop/static/css/darkdemo.min.css,4\9\49d4a974011ba98af0cc0aca2fc6ae8977e5da4c
-D
-online_shop/forms.py,3\5\35860d95b0e6709e38c73c4087c780895c6d1910
-Z
-*online_shop/templates/inc/form_errors.html,1\1\11c3b1aa4fcbf80b3a84ba427d9dedcc962f6395
-P
- online_shop/templates/login.html,7\f\7febf0aeb12a96073d104d3c6f629b8dbf47daff
-Q
-!online_shop/templates/loader.html,2\d\2d2dbf809baaa0a7de5854091b1da8175a79daf4
 7
 test.py,a\3\a36e355ddb203d7d4133221f339dc406cb9f480f
-P
- online_shop/templates/demo3.html,3\e\3e8560ece40e2af8322303274eacceba09b37c59
-Q
-!online_shop/templates/verify.html,c\e\cee386d80565dfba571f152e8eed7b2ad3764eba
-B
-online_shop/API.py,1\8\187c837c592b35911ca43d84e1096a7c69e5d124
-D
-online_shop/funcs.py,5\2\527a026b54ab0ce6a96f3926c9dd32851c59a183
-E
-online_shop/models.py,7\b\7b564e286331d029cc4573f729efc7b75a9d64c1
 5
 db.db,7\2\72e18c18f8aae94bc04337852c4abbde41237cbc
